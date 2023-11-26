@@ -6,7 +6,9 @@ const SearchResults = ({ results, onAddToPlaylist }) => {
   return (
     <div className="SearchResults">
       <h2>Search Results</h2>
-      <Tracklist tracks={results} onAddToPlaylist={onAddToPlaylist} />
+      {results.length > 0 &&
+        <Tracklist tracks={results} onAddToPlaylist={onAddToPlaylist} />
+      }
     </div>
   );
 };

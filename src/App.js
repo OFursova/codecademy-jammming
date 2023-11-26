@@ -7,14 +7,30 @@ import './App.css';
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+  const [savedPlaylists, setSavedPlaylists] = useState([]);
+
+  const handleSearch = (searchTerm) => {
+    setSearchResults(searchTerm);
+  };
 
   const addTrackToPlaylist = (track) => {
-    setPlaylist([...playlist, track]);
+    if (! playlist.some((prevTrack) => prevTrack.id === track.id)) {
+      setPlaylist([...playlist, track]);
+    }
   };
 
-  const handleSearch = (searchQuery) => {
-    setSearchResults(searchQuery);
+  const removeTrackFromPlaylist = (trackId) => {
+    setPlaylist(playlist.filter((track) => track.id !== trackId));
   };
+
+  const onSavePlaylist = (trackUris) => {
+    console.log('Saving playlist with URIs:', trackUris);
+
+    setSavedPlaylists([...savedPlaylists, playlist]);
+    
+    setPlaylist([]);
+  };
+
 
   return (
     <div className="App">
@@ -24,7 +40,11 @@ function App() {
           results={searchResults}
           onAddToPlaylist={addTrackToPlaylist}
         />
-        <Playlist playlist={playlist} />
+         <Playlist
+          playlist={playlist}
+          onRemoveFromPlaylist={removeTrackFromPlaylist}
+          onSavePlaylist={onSavePlaylist}
+        />
       </div>
     </div>
   );

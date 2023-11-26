@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/Track.module.css';
 
-const Track = ({ track, onAddToPlaylist, isPlaylistTrack }) => {
+const Track = ({ track, onAddToPlaylist, isPlaylistTrack, onRemove }) => {
   const handleAddToPlaylist = () => {
     // Call onAddToPlaylist function from the parent with the track
     onAddToPlaylist(track);
@@ -15,7 +15,10 @@ const Track = ({ track, onAddToPlaylist, isPlaylistTrack }) => {
         <p className={styles.album}>{track.album}</p>
       </div>
       {!isPlaylistTrack && (
-      <button className={styles.button} onClick={handleAddToPlaylist}>Add to Playlist</button>
+      <button className={styles.addButton} onClick={handleAddToPlaylist}>ADD</button>
+      )}
+      {isPlaylistTrack && (
+        <button className={styles.removeButton} onClick={onRemove}>REMOVE</button>
       )}
     </div>
   );
