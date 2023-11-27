@@ -6,8 +6,8 @@ const Spotify = {
       return Spotify.accessToken;
     }
 
-    const clientId = '0e71c20f0164492292ad549a98ab1471';
-    const clientSecret = 'ab85fe9cd2d64be58db6c864b36e601d';
+    const clientId = 'client_id';
+    const clientSecret = 'secret';
 
     try {
       const response = await fetch('https://accounts.spotify.com/api/token', {
